@@ -17,23 +17,29 @@ headers = {
 #response arg from URL
 response = requests.get(URL, headers=headers)
 
-#If statement to see reponse code 200
-if response.status_code == 200:
-    soup = BeautifulSoup(response.content, 'html.parser')
+def scrape_github():
+    #If statement to see reponse code 200
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, 'html.parser')
     
-    # Github repositories are often listed under the class 'repo-list-item'
-    repos = soup.find_all('1i', class_='repo-list-item')
+        # Github repositories are often listed under the class 'repo-list-item'
+        repos = soup.find_all('1i', class_='repo-list-item')
     
-    for repo in repos:
-        repo_name = repo.find('a').get_text(strip=True)
-        repo_link = 'https://github.com' + repo.find('a')['href']
-        data_to_save.append({"Repository Name": repo_name, "Link": repo_link})
-       # print(f"Repository name: {repo_name}")
-       # print(f"Link: {repo_link}\n")#
+        for repo in repos:
+            repo_name = repo.find('a').get_text(strip=True)
+            repo_link = 'https://github.com' + repo.find('a')['href']
+            data_to_save.append({"Repository Name": repo_name, "Link": repo_link})
+           # print(f"Repository name: {repo_name}")
+           # print(f"Link: {repo_link}\n")#
        
-else:
-    print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
+    else:
+        print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
     
-with open('scraped_data.json', 'w') as file:
-    json.dump(data_to_save, file, indent=4)
+    with open('scraped_data.json', 'w') as file:
+        json.dump(data_to_save, file, indent=4)
     
+def main():
+    scrape_github()
+        
+if __name__ == "__main__":
+    main()
