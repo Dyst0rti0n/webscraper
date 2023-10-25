@@ -14,7 +14,7 @@ def scrape_github(URL, headers):
         
         for repo in repos:
             repo_name = repo.find('a').get_text(strip=True)
-            repo_link = 'https://email.godaddy.com' + repo.find('a')['href']
+            repo_link = 'https://github.com' + repo.find('a')['href']
             data_to_save.append({"Repository Name": repo_name, "Link": repo_link})
             print(f"Completed...")
     else:
@@ -27,7 +27,7 @@ def save_to_json(data):
         json.dump(data, file, indent=4)
 
 def main():
-    URL = 'https://email.godaddy.com'
+    URL = 'https://github.com'
     
     # Fixed the User-Agent header
     headers = {
