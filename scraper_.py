@@ -1,3 +1,4 @@
+import requests
 from time import sleep
 
 class WebScraper:
