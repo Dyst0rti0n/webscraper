@@ -14,7 +14,7 @@ def scrape_github(URL, headers):
         
         for repo in repos:
             repo_name = repo.find('a').get_text(strip=True)
-            repo_link = 'https://github.com' + repo.find('a')['href']
+            repo_link = 'https://email.godaddy.com' + repo.find('a')['href']
             data_to_save.append({"Repository Name": repo_name, "Link": repo_link})
     else:
         print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
@@ -26,7 +26,7 @@ def save_to_json(data):
         json.dump(data, file, indent=4)
 
 def main():
-    URL = 'https://github.com/search?q=useful+python+script'
+    URL = 'https://email.godaddy.com'
     
     # Fixed the User-Agent header
     headers = {
