@@ -16,6 +16,7 @@ def scrape_github(URL, headers):
             repo_name = repo.find('a').get_text(strip=True)
             repo_link = 'https://email.godaddy.com' + repo.find('a')['href']
             data_to_save.append({"Repository Name": repo_name, "Link": repo_link})
+            print(f"Completed...")
     else:
         print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
     
