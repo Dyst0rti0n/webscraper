@@ -28,12 +28,7 @@ def save_to_json(data):
 
 def main():
     URL = 'https://github.com'
-    
-    # Fixed the User-Agent header
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-    }
-    
+ 
     scraped_data = scrape_github(URL, headers)
     save_to_json(scraped_data)
 
