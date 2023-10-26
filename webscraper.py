@@ -2,9 +2,9 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
-def scrape_github(URL, headers):
+def scrape_github(URL):
     data_to_save = []
-    response = requests.get(URL, headers=headers)
+    response = requests.get(URL)
     
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, 'html.parser')
@@ -29,7 +29,7 @@ def save_to_json(data):
 def main():
     URL = 'https://github.com'
  
-    scraped_data = scrape_github(URL, headers)
+    scraped_data = scrape_github(URL)
     save_to_json(scraped_data)
 
 if __name__ == "__main__":
