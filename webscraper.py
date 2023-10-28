@@ -3,18 +3,22 @@ import requests
 from bs4 import BeautifulSoup
 
 def scrape_github(url):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    }
+    
     data_to_save = []
-    response = requests.get(url)
+    response = requests.get(url, headers=headers)
     
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, 'html.parser')
         
         # Assuming for now that 'repo-list-item' is the correct class
-        repos = soup.find_all('li', class_='repo-list-item')
+        repos = soup.find_all('li', class_='box-row')
         
         for repo in repos:
             repo_name = repo.find('a').get_text(strip=True)
-            repo_link = 'https://github.com' + repo.find('a')['href']
+            repo_link = 'https://github.com/trending' + repo.find('a')['href']
             data_to_save.append({"Repository Name": repo_name, "Link": repo_link})
             print(f"Completed...")
     else:
@@ -27,9 +31,9 @@ def save_to_json(data):
         json.dump(data, file, indent=4)
 
 def main():
-    url = 'https://github.com'
+    url = 'https://github.com/trending'
  
-    scraped_data = scrape_github(URL)
+    scraped_data = scrape_github(url)
     save_to_json(scraped_data)
 
 if __name__ == "__main__":
