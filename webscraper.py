@@ -13,14 +13,10 @@ def scrape_github(url):
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, 'html.parser')
         
-      
-        repos = soup.find_all('li', class_='box-row')
-        
-        for repo in repos:
-            repo_name = repo.find('a').get_text(strip=True)
-            repo_link = 'https://github.com/trending' + repo.find('a')['href']
-            data_to_save.append({"Repository Name": repo_name, "Link": repo_link})
-            print(f"Completed...")
+        repos1 = soup
+        articles = soup.find_all('p', {'class': 'col-9 color-fg-muted my-1 pr-4'})
+        print(articles)
+       
     else:
         print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
     
