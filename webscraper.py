@@ -20,7 +20,7 @@ def scrape_github(url):
         print(articles)
 
         print("articles")
-         for article in articles:
+        for article in articles:
             try:
                 repo_name_element = article.find('a')  
                 repo_description_element = article.find('p', {'class': 'col-9 color-fg-muted my-1 pr-4'})
