@@ -13,7 +13,7 @@ def scrape_github(url):
     if response.status_code == 200:
         soup = BeautifulSoup(response.content, 'html.parser')
         
-        # Assuming for now that 'repo-list-item' is the correct class
+      
         repos = soup.find_all('li', class_='box-row')
         
         for repo in repos:
